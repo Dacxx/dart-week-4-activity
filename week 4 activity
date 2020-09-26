@@ -1,0 +1,62 @@
+void main(){
+
+var phone = {
+    "Item ID" : "1",
+    "Price" : "25000",
+    "Quantity" : "1",
+    "Discount" : "10",
+};
+
+var externalHardDrive = {
+    "Item ID" : "2",
+    "Price" : "5000",
+    "Quantity" : "1",
+    "Discount" : "10",
+};
+var headset = {
+    "Item ID" : "3",
+    "Price" : "1500",
+    "Quantity" : "1",
+    "Discount" : "10",
+};
+var chair = {
+    "Item ID" : "4",
+    "Price" : "3000",
+    "Quantity" : "10",
+    "Discount" : "20",
+};
+var computer = {
+    "Item ID" : "5",
+    "Price" : "50000",
+    "Quantity" : "10",
+    "Discount" : "20",
+};
+
+phone ["subTotal"] = get_subTotal(phone).toString();
+externalHardDrive ["subTotal"] = get_subTotal(externalHardDrive).toString();
+headset["subTotal"] = get_subTotal(headset).toString();
+chair ["subTotal"] = get_subTotal(chair).toString();
+computer ["subTotal"] = get_subTotal(computer).toString();
+
+var item_List = [phone, externalHardDrive, headset, chair, computer];
+int totalAmountPayable = 0;
+ item_List.forEach((x) {
+     x["Price"] = "P" + x["Price"];
+     x["Discount"] = x["Discount"] + "%";
+     totalAmountPayable += int.parse(x["subTotal"]) ;
+     x.forEach((key, value) {
+       print(key + " : " + value);
+     });
+     print("");
+ });
+     print("Total Amount Payable $totalAmountPayable");
+}
+
+int get_subTotal (var mapName){
+    int itemPrice = int.parse(mapName["Price"]);
+    int itemQuantity = int.parse(mapName["Quantity"]);
+    int itemDiscount = int.parse(mapName["Discount"]);
+    int totalDiscount = itemPrice - (itemPrice * itemDiscount ~/ 100);
+
+  return totalDiscount * itemQuantity;
+}
